@@ -1,0 +1,6 @@
+.product-item_image {
+    position: relative;
+    width: 100%;
+    min-height: 167px;
+    margin: 10px 0 10px
+}
