@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import CartItem from './cartItem'
-import fetcher from '../../services/fetcher'
 
 class Cart extends Component {
     state = {
@@ -15,16 +14,16 @@ class Cart extends Component {
 
     render() {
         const prefix = this.props.prefix || 'side-cart'
-        return this.props.cart? (
+        return this.props.cart ? (
             <div className={ prefix + (this.state.open ? '' : ' in') }>
-              {prefix !== 'side-cart'? 
-              null 
-              :<div className={`${prefix}_toggle`} onClick={ this.toggleCart }>
-                { this.state.open ? 'X' : 'O' }
-              </div>}
-              <h2 className={`${prefix}_title`}>Your Cart: </h2>
+              { prefix !== 'side-cart' ? null
+                : <span className={ `${prefix}_toggle` } onClick={ this.toggleCart }>
+                    { this.state.open ? 'X' : 'O' }
+                  </span> }
+              { this.props.children }
+              <h2 className={ `${prefix}_title` }>Your Cart: </h2>
               <ul className="list-unstyled">
-                { this.props.cart.map(item => (<CartItem key={ item.id } item={ item } removeItem={this.removeItem}/>)) }
+                { this.props.cart.map(item => (<CartItem key={ item._id } item={ item } removeItem={ this.removeItem } />)) }
               </ul>
             </div>
             ) : null

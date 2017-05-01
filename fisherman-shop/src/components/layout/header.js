@@ -5,11 +5,11 @@ const Header = (props) => {
   const {location} = props
 
   function isDetail() {
-    if(location.pathname.indexOf('/products') === 0 && location.pathname.length === 34) return 'active'
+    if (location.pathname.indexOf('/products') === 0 && location.pathname.length === 34) return 'active'
   }
 
   function isActive(path) {
-    if(location.pathname === path) return 'active'
+    if (location.pathname === path) return 'active'
     return ''
   }
 
@@ -17,10 +17,13 @@ const Header = (props) => {
     <div className="jumbotron">
       <h1 className="display-2">Let's shop!</h1>
       <ul className="nav nav-pills">
-        <li role="presentation" className={isActive('/products')}>
-          <Link to='/products'>Home</Link>
+        <li role="presentation" className={ isActive('/') }>
+          <Link to='/'>Home</Link>
         </li>
-        <li role="presentation" className={isActive('/cart')}>
+        <li role="presentation" className={ isActive('/products') }>
+          <Link to='/products'>Products</Link>
+        </li>
+        <li role="presentation" className={ isActive('/cart') }>
           <Link to='/cart'>Cart</Link>
         </li>
         { isDetail() ? (<li role="presentation" className="active"><a>Detail</a></li>) : null }

@@ -6,7 +6,9 @@ class SideCart extends Component {
     state = {  }
     render() {
         return (
-            <Cart {...this.props}/>
+            <Cart {...this.props}>
+                <div className="side-cart_quantity">{this.props.cart.length}</div>
+            </Cart>
         );
     }
 }

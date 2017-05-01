@@ -4,5 +4,5 @@ const path = require('path')
 
 module.exports = app
 
-app.use('/assets', express.static(path.join(__dirname, 'build')))
+app.use('/static', express.static(path.join(__dirname, 'public/static')))
 
