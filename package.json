@@ -1,0 +1,34 @@
+{
+  "name": "np",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/nopelluhh/np.git",
+  "author": "Noah Peller <napeller@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-latest": "^6.24.0",
+    "babel-preset-react": "^6.24.1",
+    "bezier-easing": "^2.0.3",
+    "browser-sync": "^2.18.8",
+    "browser-sync-webpack-plugin": "^1.1.4",
+    "css-loader": "^0.28.0",
+    "d3": "^4.7.4",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "gsap": "^1.19.1",
+    "html-webpack-plugin": "^2.28.0",
+    "import-glob-loader": "^1.1.0",
+    "raw-loader": "^0.5.1",
+    "react": "^15.5.4",
+    "webpack": "^2.4.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.0",
+    "node-sass": "^4.5.2",
+    "sass-loader": "^6.0.3",
+    "url-loader": "^0.5.8",
+    "webpack-init": "^0.1.2"
+  }
+}

@@ -1,0 +1,99 @@
+@import 'util';
+@import 'typography';
+// screen sizes
+$sc-md: 1000px;
+$sc-sm: 500px;
+// colors
+$primary: #d5ece7;
+$primary_dark: #7208fd;
+body {
+    background-color: $primary;
+    color: white;
+    font-family: 'Roboto Mono', serif;
+    font-size: 0.8em;
+    padding: 5px;
+    @media (min-width: $sc-sm) {
+        padding: 0px;
+    }
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+// header
+header {
+    color: $text-dark;
+    position: absolute;
+    top: 5px;
+    font-size: 6em;
+    @media (min-width: $sc-sm) {
+        top: 20vh;
+        width: 50%;
+        left: 50%;
+    }
+    @media (max-width: 1000px) {
+        font-size: 4em;
+    }
+}
+
+.headline-letter {
+    cursor: default;
+    display: inline-block;
+    position: relative;
+    text-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2);
+    user-select: none;
+}
+
+.headline-word {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    @media (max-width: $sc-md + 1) {
+        display: block;
+    }
+}
+
+.headline-space {
+    @media (min-width: $sc-md + 1) {
+        width: 1rem;
+    }
+}
+
+//main 
+#holder {
+    background-color: #6122b3;
+    border-radius: 5px;
+    bottom: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 1px 3px 3px rgba(0, 0, 0, 0.13);
+    display: block;
+    height: 6em;
+    left: 10px;
+    overflow: hidden;
+    padding: 15px;
+    position: absolute;
+    right: 10px;
+    transition: box-shadow 0.3s cubic-bezier(1, 0.86, 0.85, -0.08);
+    @media (min-width: 500px) {
+        bottom: initial;
+        left: initial;
+        top: 40vh;
+        left: 15px;
+        right: calc(50% + 15px);
+    }
+    section {
+        position: relative;
+        padding-bottom: 20px;
+    }
+}
+
+#experiment {
+    opacity: 1;
+    height: 100%;
+    a {
+        display: block;
+    }
+}
+
+#bio {
+    height: 100%;
+}

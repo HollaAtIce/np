@@ -1,0 +1,20 @@
+$text-dark: #7208fd;
+$text-bright: #888;
+$text-link: #ff963b;
+.thin {
+    font-family: 'Work Sans', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    &:link, 
+    &:active {
+        color: $text-link;
+    }
+    &:visited {
+        color: darken($text-link, 10)
+    }
+    &:hover {
+        color: lighten($text-link, 10)
+    }
+}
