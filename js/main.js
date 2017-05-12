@@ -3,10 +3,10 @@ import {
     TimelineLite,
     Elastic
 } from 'gsap'
-
-
-
 const customEase = require('bezier-easing')
+
+
+
 
 document.addEventListener('DOMContentLoaded', ready)
 
@@ -17,13 +17,14 @@ function ready() {
     holder = $('#holder')[0]
     experiment = $('#experiment')[0]
     bio = $('#bio')[0]
+    skills = $('#skills')[0]
     slider = $('#slider')[0]
     header = $('header')[0]
 
     // listeners
-    toggle[0].addEventListener('click', toggleExperiments)
-    toggle[1].addEventListener('click', toggleExperiments)
+    toggle.forEach(e => e.addEventListener('click', toggleExperiments))
 
+    window.onresize = resizeUpdate
     setupHeadline()
     resizeUpdate()
 }
@@ -38,8 +39,10 @@ let clickTimer = false,
     text_light = 'white',
     state = 'bio',
     duration = 0.4,
-    toggle, header, holder, bio, experiment, slider,
-    swoop = customEase(0.52, 0.85, 0.93, 0.51)
+    toggle, header, holder, bio, experiment, slider, skills,
+    swoop = customEase(0.52, 0.85, 0.93, 0.51),
+    heights,
+    offsets
 
 let states = {
     experiment: {
@@ -53,6 +56,12 @@ let states = {
         bg: primary,
         holderBg: '#6122b3',
         headerText: primary_dark
+    },
+    skills: {
+        text: '#000000',
+        bg: '#FFFFFF',
+        holderBg: '#FFFFFF',
+        headerText: '#DDDDDD'
     }
 }
 
@@ -62,19 +71,26 @@ let $ = document.querySelectorAll.bind(window.document)
 
 
 
-function toggleExperiments() {
+function toggleExperiments(e) {
     event.preventDefault()
 
     let targetHeight, slide
 
-    if (state !== 'experiment') {
+    switch (e.target.dataset.to) {
+    case 'experiments':
         state = 'experiment'
-        targetHeight = experiment.getBoundingClientRect().height
+        targetHeight = experiment.getBoundingClientRect().height - 20
         slide = -getComputedStyle(bio).height.slice(0, -2) - 20
-    } else {
+        break
+    case 'bio':
         state = 'bio'
         targetHeight = bio.getBoundingClientRect().height - 20
         slide = 0
+        break
+    case 'skills':
+        state = 'skills'
+        targetHeight = skills.getBoundingClientRect().height
+        slide = -getComputedStyle(bio).height.slice(0, -2) - getComputedStyle(experiment).height.slice(0, -2) - 40
     }
 
     let { holderBg, bg, text, headerText } = states[state]
@@ -109,10 +125,24 @@ function toggleExperiments() {
 // utilities
 
 function resizeUpdate() {
-    holder.style.height = getComputedStyle(bio).height
+    heights = {
+        bio: getComputedStyle(bio).height,
+        skills: getComputedStyle(skills).height,
+        experiment: getComputedStyle(experiment).height
+    }
+
+    offsets = {
+        bio: 0,
+        experiment: -heights.bio.slice(0, -2) - 20,
+        skills: -heights.bio.slice(0, -2) - heights.experiment.slice(0, -2) - 40
+    }
+
+    holder.style.height = heights[state]
+
     TweenMax.set(slider, {
-        y: state === 'bio' ? 0 : -getComputedStyle(bio).height.slice(0, -2) - 20
+        y: offsets[state]
     })
+    
 }
 
 function setupHeadline() {
@@ -121,7 +151,7 @@ function setupHeadline() {
     splitText(headline)
     addWiggles(headline)
     letters = document.getElementsByClassName('headline-letter')
-    setTimeout(() => shake([letters[0], letters[3], letters[7], letters[14]], 15, 0.08), 1000)
+    setTimeout(() => shake([letters[0], letters[3], letters[7], letters[14]], 15, 0.08), 3000)
 }
 
 
@@ -174,7 +204,7 @@ function resetLetters() {
     let letters = [].slice.call(document.getElementsByClassName('headline-letter'))
 
     TweenMax.staggerTo(letters, 0.8, {
-        ease: Elastic.easeOut.config(1, 0.4 ),
+        ease: Elastic.easeOut.config(1, 0.4),
         x: 0,
         y: 0,
         rotation: 0

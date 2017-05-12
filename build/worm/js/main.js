@@ -37,12 +37,11 @@ changeFlux()
 function animate() {
     setTimeout(() => requestAnimationFrame(animate), 1)
 
-    document.body.style.filter = 'hue-rotate(' + (i*5)%360 + 'deg)'
+    document.body.style.filter = 'hue-rotate(' + (i*9)%360 + 'deg)'
 
-    //console.log(flux === (flux = Math.random() > 0.99 ? 0.001 : -0.001))
-    //i *= flux
     targX = (100 - 70) * Math.cos(i * flux) + 2.2 * Math.cos((100 / 70 - 1) * i) + width / 2 // Math.sin(i/5) * 100 + width/2  
     targY = (100 - 70) * Math.sin(i * flux) - 2.2 * Math.sin((100 / 70 - 1) * i) + height / 2 // Math.sin(8.6 * Math.sin(i/10)) *  100 + height/2 
+    
     for (let j = 0, l = grid.length; j < l; j++) {
         let ind = j
         let el = grid[j]
@@ -53,7 +52,7 @@ function animate() {
         ///el.style.height = 100 + (40 * Math.random())
         let mod = 1.1 - ind * 0.00099
         let tweenX = targX + (((+el.pastX || 0) - targX) / mod) + (Math.sin(i + (ind / 1000)) * ind ) * (1 + Math.cos(ind / 3) / 4)
-        let tweenY = targY + (((+el.pastY || 0) - targY) / mod) + (Math.sin(i + (ind / 10) + Math.PI / 2) * (ind * (ind / 9) / 1.5 - 50) / 3)
+        let tweenY = targY + (((+el.pastY || 0) - targY) / mod) + (Math.sin(i + (ind / 10)) * (ind * (ind / 9) / 1.5 - 50) / 3) - 5
         el.setAttribute('x', tweenX + ind * 0.02)
         el.setAttribute('y', tweenY + ind / 5)
         el.pastX = el.getAttribute('x')
@@ -61,20 +60,12 @@ function animate() {
 
     }
 }
-
-function fadeClick() {
-    if (click > 0) setTimeout(() => requestAnimationFrame(fadeClick), 10)
-    click -= 0.01
-    clickEl.style.opacity = click
-}
-
 function ready() {
     svg = document.getElementById('svgbg')
     clickEl = document.getElementById('click')
     makeGrid(10, 3, 'rect', ['blue', 'screen'])
     setTarget()
     animate()
-    fadeClick()
 }
 
 // utilities
